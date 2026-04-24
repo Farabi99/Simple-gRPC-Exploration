@@ -1,4 +1,4 @@
-Project Title
+Simple gRPC Exploration
 This project is to explore how to implement simple gRPC API with golang
 
 📌 Overview
