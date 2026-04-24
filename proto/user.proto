@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package user;
+
+// Defines the import path for the generated Go code
+option go_package = "github.com/Farabi99/Simple-gRPC-Exploration/proto";
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+  rpc GetUser (GetUserRequest) returns (UserResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message UserResponse {
+  User user = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+}
+
+message ListUsersRequest {
+  int32 limit = 1;        // How many records to return
+  string cursor = 2;      // The ID of the last record seen. Leave empty for the first page.
+}
+
+message ListUsersResponse {
+  repeated User users = 1; // The list of users
+  string next_cursor = 2;  // The ID to use as the cursor for the next page. Empty if end of list.
+}
